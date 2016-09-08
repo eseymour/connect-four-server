@@ -1,14 +1,14 @@
 <?php
 $width = 7
 
-if($_GET['pid'] === null) {
+if(is_null($_GET['pid'])) {
     $response = array('response' => false, 'reason' => "PID not specified");
     echo json_encode($response);
     exit;
 }
 $pid = $_GET['pid']
 
-if($_GET['move'] === null) {
+if(is_null($_GET['move'])) {
     $response = array('response' => false, 'reason' => "Move not specified");
     echo json_encode($response);
     exit;

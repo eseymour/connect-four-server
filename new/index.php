@@ -1,7 +1,7 @@
 <?php
 $strategies = array();
 
-if ($_GET['strategy'] === null) {
+if (is_null($_GET['strategy'])) {
     // No strategy specified
     $response = array('response' => false, 'reason' => "Strategy not specified");
     echo json_encode($response);
@@ -9,7 +9,7 @@ if ($_GET['strategy'] === null) {
 }
 
 $strategy = $_GET[strategy];
-if ($strategies[$strategy] === null) {
+if (is_null($strategies[$strategy])) {
     // Strategy not in array of defined strategies
     $response = array('response' => false, 'reason' => "Unknown strategy");
     echo json_encode($response);
