@@ -1,6 +1,10 @@
 # Connect Four Server
 
 ## 0.1.0 - 2016-09-07
+### Added
+- Blank `new/index.php`
+- Blank `play/index.php`
+
 ### Changed
 - `info/index.html` is now `info/index.php`
 - Placeholder data in `info/index.php` is now actual php code evaluating constants
