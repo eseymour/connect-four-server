@@ -9,4 +9,4 @@
 - `CHANGELOG` as an exercise in change logs
 - `.gitignore` file
 
-[0.1.0]: https://github.com/eseymour/connect-four-server/releases/tag/v0.1.0
+[0.1.0]: https://github.com/eseymour/connect-four-server/tree/v0.1.0
