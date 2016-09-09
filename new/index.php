@@ -1,6 +1,6 @@
 <?php
 define('__ROOT__', dirname(__DIR__).'/');
-require(__ROOT__.'lib.php');
+require_once(__ROOT__.'lib.php');
 
 $strategy = $_GET['strategy'];
 

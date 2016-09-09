@@ -1,6 +1,6 @@
 # Connect Four Server
 
-## Unreleased
+## [0.2.0] - 2016-09-08
 ### Added
 - `lib.php` for common code between pages
 - Added basic errors to `new/` and `play/`
@@ -18,4 +18,5 @@ code structure.
 - `CHANGELOG` as an exercise in change logs
 - `.gitignore` file
 
+[0.2.0]: https://github.com/eseymour/connect-four-server/tree/v0.2.0
 [0.1.0]: https://github.com/eseymour/connect-four-server/tree/v0.1.0
