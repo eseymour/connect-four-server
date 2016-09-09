@@ -1,5 +1,9 @@
 # Connect Four Server
 
+## Unreleased
+### Changed
+- Fixed typo in change log for version 0.2.0
+
 ## [0.2.0] - 2016-09-08
 ### Added
 - `lib.php` for common code between pages
@@ -7,8 +11,8 @@
 - Function for error response.
 
 ### Changed
-- Change log formatting for API files to focus more on the API than the
-code structure.
+- Changed formatting for API files in change log to focus more on the API than
+on the code structure.
 
 ## [0.1.0] - 2016-09-07
 ### Added
