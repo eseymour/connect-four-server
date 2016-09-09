@@ -3,6 +3,7 @@
 ## Unreleased
 ### Added
 - Added basic errors to `new/` and `play/`
+- Function for error response.
 
 ### Changed
 - Change log formatting for API files to focus more on the API than the
