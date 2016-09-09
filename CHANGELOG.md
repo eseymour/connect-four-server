@@ -2,6 +2,7 @@
 
 ## Unreleased
 ### Added
+- `lib.php` for common code between pages
 - Added basic errors to `new/` and `play/`
 - Function for error response.
 
