@@ -1,4 +1,6 @@
 <?php
+namespace EdwardSeymour\ConnectFour\Lib;
+
 $width = 7;
 $height = 6;
 $strategies = array();

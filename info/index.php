@@ -1,4 +1,5 @@
 <?php
+namespace EdwardSeymour\ConnectFour;
 define('__ROOT__', dirname(__DIR__).'/');
 require_once(__ROOT__.'lib.php');
 
