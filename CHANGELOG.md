@@ -1,8 +1,13 @@
 # Connect Four Server
 
 ## Unreleased
+### Added
+- Namespacing
 ### Changed
 - Fixed typo in change log for version 0.2.0
+- Changed syntax to PHP 5.6
+- Stop `Lib/responseError` from exiting. Exiting now explixitly written on guard
+statements to better show intention
 
 ## [0.2.0] - 2016-09-08
 ### Added
@@ -16,7 +21,7 @@ on the code structure.
 
 ## [0.1.0] - 2016-09-07
 ### Added
-- Blank `new/` and `play` PHP files
+- Blank `new/` and `play/` PHP files
 - `info/` with PHP code evaluating magic numbers
 - Github repository
 - `CHANGELOG` as an exercise in change logs

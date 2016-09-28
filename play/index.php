@@ -1,22 +1,32 @@
 <?php
 namespace EdwardSeymour\ConnectFour;
-define('__ROOT__', dirname(__DIR__).'/');
-require_once(__ROOT__.'lib.php');
+
+define('ROOT', dirname(__DIR__).'/');
+require_once(ROOT.'lib.php');
 
 $pid = $_GET['pid'];
 $move = $_GET['move'];
 
 if (is_null($pid)) {
     Lib\responseError('PID not specified');
+    exit;
 }
 if (is_null($move)) {
     Lib\responseError('Move not specified');
+    exit;
 }
 if (!is_numeric($move)) {
     Lib\responseError('Non-numeric move');
+    exit;
 }
-// No games are created yet, so all PIDs are unknown
-responseError('Unknown PID');
+if(!file_exists(DATA_DIR.$pid)) {
+    Lib\responseError('Unknown PID');
+    exit;
+}
 if ($move < 0 || $move >= $width) {
-    Lib\responseError("Invalid move $move");
+    Lib\responseError("Invalid move");
+    exit;
 }
+
+// TODO: Implement game creation
+Lib\responseError('Not implemented yet!');
