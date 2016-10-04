@@ -1,8 +1,8 @@
 <?php
-namespace EdwardSeymour\ConnectFour;
+namespace ConnectFour;
 
 define('ROOT', dirname(__DIR__).'/');
-require_once(ROOT.'lib.php');
+require_once(ROOT.'config.php');
 
-$info = ['width' => $width, 'height' => $height, 'strategies' => $strategies];
+$info = ['width' => BOARD_WIDTH, 'height' => BOARD_HEIGHT, 'strategies' => STRATEGIES];
 echo json_encode($info);

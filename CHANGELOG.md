@@ -1,12 +1,15 @@
 # Connect Four Server
 
-## Unreleased
+## [0.3.0]
 ### Added
 - Namespacing
+- `Model\Game` and `Model\Board`, with JSON serialization and deserialization.
+- Ability to create games, and play against simple random opponent.
+- `Lib\generatePID` using stronger PRNG and base64URL encoding.
 ### Changed
 - Fixed typo in change log for version 0.2.0
 - Changed syntax to PHP 5.6
-- Stop `Lib/responseError` from exiting. Exiting now explixitly written on guard
+- Stop `Lib\responseError` from exiting. Exiting now explixitly written on guard
 statements to better show intention
 
 ## [0.2.0] - 2016-09-08
