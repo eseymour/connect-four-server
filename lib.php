@@ -11,6 +11,11 @@ function response($status, $array)
     echo json_encode($response);
 }
 
+function responseSuccess($array)
+{
+    response(true, $array);
+}
+
 function responseError($message)
 {
     response(false, ['reason' => $message]);

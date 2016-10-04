@@ -22,4 +22,4 @@ $game = new Model\Game();
 $contents = json_encode(['strategy' => $strategy, 'game' => $game]);
 
 file_put_contents(DATA_DIR.$pid, $contents);
-Lib\response(true, ['pid' => $pid]);
+Lib\responseSuccess(['pid' => $pid]);

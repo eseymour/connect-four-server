@@ -41,9 +41,9 @@ $game->doMove($move, 0);
 if($game->isGameOver()) {
   $winningMove = $game->didLastMoveWin();
   if($winningMove) {
-    Lib\response(true, ['ack_move'=> ['slot'=> $move, 'isWin'=> true, 'isDraw'=> false, 'row'=>$winningMove]]);
+    Lib\responseSuccess(['ack_move'=> ['slot'=> $move, 'isWin'=> true, 'isDraw'=> false, 'row'=>$winningMove]]);
   } elseif($game->isDraw()) {
-    Lib\response(true, ['ack_move'=> ['slot'=> $move, 'isWin'=> false, 'isDraw'=> true, 'row'=> []]]);
+    Lib\responseSuccess(['ack_move'=> ['slot'=> $move, 'isWin'=> false, 'isDraw'=> true, 'row'=> []]]);
   } else {
     Lib\assert(false, "Game without a draw is over but nobody won.");
   }
@@ -60,11 +60,11 @@ $game->doMove($computerMove, 1);
 if($game->isGameOver()) {
   $winningMove = $game->didLastMoveWin();
   if($winningMove) {
-    Lib\response(true, ['ack_move'=> ['slot'=> $move, 'isWin'=> false, 'isDraw'=> false, 'row'=> []],
-                    'move'=> ['slot'=> $computerMove, 'isWin'=> true, 'isDraw'=> false, 'row'=> $winningMove]]);
+    Lib\responseSuccess(['ack_move'=> ['slot'=> $move, 'isWin'=> false, 'isDraw'=> false, 'row'=> []],
+                         'move'=> ['slot'=> $computerMove, 'isWin'=> true, 'isDraw'=> false, 'row'=> $winningMove]]);
   } elseif($game->isDraw()) {
-    Lib\response(true, ['ack_move'=> ['slot'=> $move, 'isWin'=> false, 'isDraw'=> false, 'row'=> []],
-                    'move'=> ['slot'=> $computerMove, 'isWin'=> false, 'isDraw'=> true, 'row'=> []]]);
+    Lib\responseSuccess(['ack_move'=> ['slot'=> $move, 'isWin'=> false, 'isDraw'=> false, 'row'=> []],
+                         'move'=> ['slot'=> $computerMove, 'isWin'=> false, 'isDraw'=> true, 'row'=> []]]);
   } else {
     assert(false, "Game without a draw is over but nobody won.");
   }
@@ -74,5 +74,5 @@ if($game->isGameOver()) {
 
 $contents = json_encode(['strategy'=> $strategy, 'game'=> $game]);
 file_put_contents(DATA_DIR.$pid, $contents);
-Lib\response(true, ['ack_move'=> ['slot'=> $move, 'isWin'=> false, 'isDraw'=> false, 'row'=> []],
-                'move'=> ['slot'=> $computerMove, 'isWin'=> false, 'isDraw'=> false, 'row'=> []]]);
+Lib\responseSuccess(['ack_move'=> ['slot'=> $move, 'isWin'=> false, 'isDraw'=> false, 'row'=> []],
+                     'move'=> ['slot'=> $computerMove, 'isWin'=> false, 'isDraw'=> false, 'row'=> []]]);
