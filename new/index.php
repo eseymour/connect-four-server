@@ -12,7 +12,6 @@ if (is_null($strategy)) {
     exit;
 }
 if (!in_array($strategy, STRATEGIES, true)) {
-    echo $strategy;
     Lib\responseError('Unknown Strategy');
     exit;
 }
