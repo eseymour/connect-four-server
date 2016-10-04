@@ -1,5 +1,5 @@
 <?php
-define('ROOT', __DIR__.'/');
+if(!defined('ROOT')) define('ROOT', __DIR__.'/');
 define('DATA_DIR', ROOT.'writable/');
 
 const BOARD_WIDTH = 7;

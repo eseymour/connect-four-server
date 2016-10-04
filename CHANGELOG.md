@@ -1,5 +1,13 @@
 # Connect Four Server
 
+## Unreleased
+### Changed
+- Refactored redundant code from `Model\Board`.
+- Memoized check for winning row, so that it doesn't generate rows multiple
+times during testing.
+- Slight changes to the `Model\Game` ABI. Function ames should be more in line
+with what they do.
+
 ## [0.3.0] - 2016-01-04
 ### Added
 - Namespacing

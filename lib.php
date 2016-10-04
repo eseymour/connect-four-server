@@ -1,7 +1,7 @@
 <?php
 namespace ConnectFour\Lib;
 
-define('ROOT', __DIR__.'/');
+if(!defined('ROOT')) define('ROOT', __DIR__.'/');
 require_once(ROOT.'config.php');
 
 function response($status, $array) {
@@ -29,9 +29,9 @@ function generatePID() {
   }
 }
 
-function assert_log($file, $line, $expression, $description = "Generic assertion.") {
+function assertResponse($file, $line, $expression, $description = "Generic assertion.") {
   error_log("[ERROR] Assertion: $description failed at $file on line $line.");
   responseError("Failed assertion: $description");
 }
 
-assert_options(ASSERT_CALLBACK, 'ConnectFour\Lib\assert_log');
+assert_options(ASSERT_CALLBACK, 'ConnectFour\Lib\assertResponse');

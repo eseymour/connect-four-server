@@ -1,7 +1,7 @@
 <?php
 namespace ConnectFour\Model;
 
-define('ROOT', dirname(__DIR__) . '/');
+if(!defined('ROOT')) define('ROOT', dirname(__DIR__) . '/');
 require_once(ROOT.'lib.php');
 require_once(ROOT.'model/board.php');
 
@@ -62,10 +62,14 @@ class Game implements \JsonSerializable {
   }
 
   public function isGameOver() {
-    return $this->turn >= 42 || $this->didLastMoveWin();
+    return $this->turn >= 42 || $this->isWin();
   }
 
-  public function didLastMoveWin() {
+  public function isWin() {
+    return !empty($this->getRow());
+  }
+
+  public function getRow() {
     if(is_null($this->winningRow)) {
       if($this->turn < 7) {
         // Impossible for anyone to win before turn 7
@@ -78,7 +82,7 @@ class Game implements \JsonSerializable {
   }
 
   public function isDraw() {
-    return $this->turn >= 42 && !$this->didLastMoveWin();
+    return $this->turn >= 42 && !$this->isWin();
   }
 
   public function jsonSerialize() {

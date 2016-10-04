@@ -1,7 +1,7 @@
 <?php
 namespace ConnectFour\Model;
 
-define('ROOT', dirname(__DIR__) . '/');
+if(!defined('ROOT')) define('ROOT', dirname(__DIR__) . '/');
 require_once(ROOT.'lib.php');
 
 class Board implements \JsonSerializable {
@@ -55,20 +55,20 @@ class Board implements \JsonSerializable {
     return $this->columns[$column] >> $row & 1;
   }
 
-  private function getRestOfRow($player, $column, $row, $columnDirection, $rowDirection) {
-    $row = [];
+  private function getRestOfGroup($player, $column, $row, $columnDirection, $rowDirection) {
+    $group = [];
 
     for($c = $column + $columnDirection, $r = $row + $rowDirection;
-        $c >= 0, $r >= 0, $c < BOARD_HEIGHT, $r < BOARD_WIDTH;
-        $c += $columnDirection, $row += $rowDirection) {
+        $c >= 0 && $r >= 0 && $c < BOARD_WIDTH && $r < BOARD_HEIGHT;
+        $c += $columnDirection, $r += $rowDirection) {
       if($this->getDiskOwner($c, $r) == $player) {
-        array_push($row, $c, $r);
+        array_push($group, $c, $r);
       } else {
         break;
       }
     }
 
-    return $row;
+    return $group;
   }
 
   public function isWinningMove($move) {
@@ -78,30 +78,30 @@ class Board implements \JsonSerializable {
     $center = [$column, $row];
 
     //Check vertical
-    $row = array_merge($center, $this->getRestOfRow($player, $column, $row, 0, -1));
-    if(count($row) >= 8) {
-      return $row;
+    $group = array_merge($center, $this->getRestOfGroup($player, $column, $row, 0, -1));
+    if(count($group) >= 8) {
+      return $group;
     }
 
     //Check Horizontal
-    $row = array_merge($this->getRestOfRow($player, $column, $row, -1, 0), $center,
-                       $this->getRestOfRow($player, $column, $row, 1, 0));
-    if(count($row) >= 8) {
-      return $row;
+    $group = array_merge($center, $this->getRestOfGroup($player, $column, $row, -1, 0),
+                         $this->getRestOfGroup($player, $column, $row, 1, 0));
+    if(count($group) >= 8) {
+      return $group;
     }
 
     //Check Diagonal 1
-    $row = array_merge($this->getRestOfRow($player, $column, $row, 1, 1), $center,
-                       $this->getRestOfRow($player, $column, $row, -1, -1));
-    if(count($row) >= 8) {
-      return $row;
+    $group = array_merge($center, $this->getRestOfGroup($player, $column, $row, 1, 1),
+                         $this->getRestOfGroup($player, $column, $row, -1, -1));
+    if(count($group) >= 8) {
+      return $group;
     }
 
     //Check Diagonal 2
-    $row = array_merge($this->getRestOfRow($player, $column, $row, 1, -1), $center,
-                       $this->getRestOfRow($player, $column, $row, -1, 1));
-    if(count($row) >= 8) {
-      return $row;
+    $group = array_merge($center, $this->getRestOfGroup($player, $column, $row, 1, -1),
+                         $this->getRestOfGroup($player, $column, $row, -1, 1));
+    if(count($group) >= 8) {
+      return $group;
     }
 
     return [];

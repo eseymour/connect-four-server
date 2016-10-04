@@ -1,7 +1,7 @@
 <?php
 namespace ConnectFour;
 
-define('ROOT', dirname(__DIR__).'/');
+if(!defined('ROOT')) define('ROOT', dirname(__DIR__).'/');
 require_once(ROOT.'lib.php');
 require_once(ROOT.'model/game.php');
 
