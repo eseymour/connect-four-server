@@ -1,6 +1,6 @@
 # Connect Four Server
 
-## [0.3.0]
+## [0.3.0] - 2016-01-04
 ### Added
 - Namespacing
 - `Model\Game` and `Model\Board`, with JSON serialization and deserialization.
