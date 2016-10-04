@@ -5,7 +5,9 @@
 - Namespacing
 - `Model\Game` and `Model\Board`, with JSON serialization and deserialization.
 - Ability to create games, and play against simple random opponent.
-- `Lib\generatePID` using stronger PRNG and base64URL encoding.
+- `Lib\generatePID` using stronger PRNG and base64URL encoding when mcrypt is
+available.
+
 ### Changed
 - Fixed typo in change log for version 0.2.0
 - Changed syntax to PHP 5.6

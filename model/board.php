@@ -119,7 +119,7 @@ class Board implements \JsonSerializable {
         break;
       }
     }
-    for($c = $column - 1, $r = $row + 1; $c >= 0 && $r < BOARD_WIDTH && count($diagonal2) < 8; $c--, $r++) {
+    for($c = $column - 1, $r = $row + 1; $c >= 0 && $r < BOARD_HEIGHT && count($diagonal2) < 8; $c--, $r++) {
       if($this->getDiskOwner($c, $r) == $player) {
         array_push($diagonal2, $c, $r);
       } else {
