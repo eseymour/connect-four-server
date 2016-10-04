@@ -9,6 +9,7 @@ class Game implements \JsonSerializable {
   private $board;
   private $turn;
   private $moves;
+  private $winningRow;
 
   public function __construct($data = null) {
     if(is_null($data)) {
@@ -17,9 +18,11 @@ class Game implements \JsonSerializable {
     } elseif(is_array($data)) {
       $this->board = new Board($data['board']);
       $this->turn = $data['turn'];
+      $this->winningRow = $data['winningRow'];
     } elseif(is_object($data)) {
       $this->board = new Board($data->board);
       $this->turn = $data->turn;
+      $this->winningRow = $data->winningRow;
     }
     $this->moves = [];
   }
@@ -44,6 +47,7 @@ class Game implements \JsonSerializable {
     assert(!$this->isGameOver(), "Game is already over");
     assert($this->turn % 2 == $player, "Unexpected player, $player");
 
+    $this->winningRow = null;
     $this->board->doMove($move, $player);
     $this->turn++;
     $this->moves[] = $move;
@@ -62,11 +66,15 @@ class Game implements \JsonSerializable {
   }
 
   public function didLastMoveWin() {
-    if(!empty($this->moves)) {
-      return $this->board->isWinningMove(end($this->moves));
-    } else {
-      return false;
+    if(is_null($this->winningRow)) {
+      if($this->turn < 7) {
+        // Impossible for anyone to win before turn 7
+        $this->winningRow = [];
+      } else {
+        $this->winningRow = $this->board->isWinningMove(end($this->moves));
+      }
     }
+    return $this->winningRow;
   }
 
   public function isDraw() {
@@ -74,6 +82,6 @@ class Game implements \JsonSerializable {
   }
 
   public function jsonSerialize() {
-    return ['board'=>$this->board, 'turn'=>$this->turn];
+    return ['board'=>$this->board, 'turn'=>$this->turn, 'winningRow'=>$this->winningRow];
   }
 }

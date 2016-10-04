@@ -1,7 +1,6 @@
 <?php
 namespace ConnectFour\Lib;
 
-define('DATA_DIR', __DIR__.'/Writable/');
 define('ROOT', __DIR__.'/');
 require_once(ROOT.'config.php');
 
@@ -29,3 +28,10 @@ function generatePID() {
     return uniqid();
   }
 }
+
+function assert_log($file, $line, $expression, $description = "Generic assertion.") {
+  error_log("[ERROR] Assertion: $description failed at $file on line $line.");
+  responseError("Failed assertion: $description");
+}
+
+assert_options(ASSERT_CALLBACK, 'ConnectFour\Lib\assert_log');

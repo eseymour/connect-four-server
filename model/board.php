@@ -130,7 +130,7 @@ class Board implements \JsonSerializable {
       return $diagonal2;
     }
 
-    return false;
+    return [];
   }
 
   public function jsonSerialize() {
