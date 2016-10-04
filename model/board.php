@@ -55,79 +55,53 @@ class Board implements \JsonSerializable {
     return $this->columns[$column] >> $row & 1;
   }
 
+  private function getRestOfRow($player, $column, $row, $columnDirection, $rowDirection) {
+    $row = [];
+
+    for($c = $column + $columnDirection, $r = $row + $rowDirection;
+        $c >= 0, $r >= 0, $c < BOARD_HEIGHT, $r < BOARD_WIDTH;
+        $c += $columnDirection, $row += $rowDirection) {
+      if($this->getDiskOwner($c, $r) == $player) {
+        array_push($row, $c, $r);
+      } else {
+        break;
+      }
+    }
+
+    return $row;
+  }
+
   public function isWinningMove($move) {
     $column = $move;
     $row = $this->columnHeights[$move] - 1;
     $player = $this->getDiskOwner($column, $row);
-    $vertical = $horizontal = $diagonal1 = $diagonal2 = [$column, $row];
+    $center = [$column, $row];
 
     //Check vertical
-    for($r = $row - 1; $r >= 0 && count($vertical) < 8; $r--) {
-      if($this->getDiskOwner($column, $r) == $player) {
-        array_push($vertical, $column, $r);
-      } else {
-        break;
-      }
-    }
-    if(count($vertical) == 8) {
-      return $vertical;
+    $row = array_merge($center, $this->getRestOfRow($player, $column, $row, 0, -1));
+    if(count($row) >= 8) {
+      return $row;
     }
 
     //Check Horizontal
-    for($c = $column + 1; $c < BOARD_WIDTH && count($horizontal) < 8; $c++) {
-      if($this->getDiskOwner($c, $row) == $player) {
-        array_push($horizontal, $c, $row);
-      } else {
-        break;
-      }
-    }
-    for($c = $column - 1; $c >= 0 && count($horizontal) < 8; $c--) {
-      if($this->getDiskOwner($c, $row) == $player) {
-        array_push($horizontal, $c, $row);
-      } else {
-        break;
-      }
-    }
-    if(count($horizontal) == 8) {
-      return $horizontal;
+    $row = array_merge($this->getRestOfRow($player, $column, $row, -1, 0), $center,
+                       $this->getRestOfRow($player, $column, $row, 1, 0));
+    if(count($row) >= 8) {
+      return $row;
     }
 
     //Check Diagonal 1
-    for($c = $column + 1, $r = $row + 1; $c < BOARD_WIDTH && $r < BOARD_HEIGHT && count($diagonal1) < 8; $c++, $r++) {
-      if($this->getDiskOwner($c, $r) == $player) {
-        array_push($diagonal1, $c, $r);
-      } else {
-        break;
-      }
-    }
-    for($c = $column - 1, $r = $row - 1; $c >= 0 && $r >= 0 && count($diagonal1) < 8; $c--, $r--) {
-      if($this->getDiskOwner($c, $r) == $player) {
-        array_push($diagonal1, $c, $r);
-      } else {
-        break;
-      }
-    }
-    if(count($diagonal1) == 8) {
-      return $diagonal1;
+    $row = array_merge($this->getRestOfRow($player, $column, $row, 1, 1), $center,
+                       $this->getRestOfRow($player, $column, $row, -1, -1));
+    if(count($row) >= 8) {
+      return $row;
     }
 
     //Check Diagonal 2
-    for($c = $column + 1, $r = $row - 1; $c < BOARD_WIDTH && $r >= 0 && count($diagonal2) < 8; $c++, $r--) {
-      if($this->getDiskOwner($c, $r) == $player) {
-        array_push($diagonal2, $c, $r);
-      } else {
-        break;
-      }
-    }
-    for($c = $column - 1, $r = $row + 1; $c >= 0 && $r < BOARD_HEIGHT && count($diagonal2) < 8; $c--, $r++) {
-      if($this->getDiskOwner($c, $r) == $player) {
-        array_push($diagonal2, $c, $r);
-      } else {
-        break;
-      }
-    }
-    if(count($diagonal2) == 8) {
-      return $diagonal2;
+    $row = array_merge($this->getRestOfRow($player, $column, $row, 1, -1), $center,
+                       $this->getRestOfRow($player, $column, $row, -1, 1));
+    if(count($row) >= 8) {
+      return $row;
     }
 
     return [];
