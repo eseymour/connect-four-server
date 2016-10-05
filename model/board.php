@@ -42,7 +42,9 @@ class Board implements \JsonSerializable {
     assert($this->columnHeights[$move] > 0, "Column $move is empty.");
 
     $this->columnHeights[$move]--;
-    return $this->columns[$move] >> $this->columnHeights[$move] & 1;
+    $player = $this->columns[$move] >> $this->columnHeights[$move] & 1;
+    $this->columns[$move] &= (1 << $this->columnHeights[$move] + 1) - 1;
+    return $player;
   }
 
   public function getDiskOwner($column, $row) {

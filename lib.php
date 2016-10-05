@@ -4,17 +4,21 @@ namespace ConnectFour\Lib;
 if(!defined('ROOT')) define('ROOT', __DIR__.'/');
 require_once(ROOT.'config.php');
 
-function response($status, $array) {
-  $response = array_merge(['response' => $status], $array);
+function response($array, $status = null) {
+  if(is_null($status)) {
+    $response = $array;
+  } else {
+    $response = array_merge(['response' => $status], $array);
+  }
   echo json_encode($response);
 }
 
 function responseSuccess($array) {
-  response(true, $array);
+  response($array, true);
 }
 
 function responseError($message) {
-  response(false, ['reason' => $message]);
+  response(['reason' => $message], false);
 }
 
 function base64url_encode($data) {
@@ -30,7 +34,6 @@ function generatePID() {
 }
 
 function assertResponse($file, $line, $expression, $description = "Generic assertion.") {
-  error_log("[ERROR] Assertion: $description failed at $file on line $line.");
   responseError("Failed assertion: $description");
 }
 

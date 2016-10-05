@@ -57,7 +57,7 @@ class Game implements \JsonSerializable {
     assert(!empty($this->moves), "There is no last move.");
 
     $this->turn--;
-    $player = $board->undoLastMove(array_pop($this->moves));
+    $player = $this->board->undoMove(array_pop($this->moves));
     assert($this->turn % 2 == $player, "Movelist and board desynchronized.");
   }
 
