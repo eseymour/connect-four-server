@@ -2,9 +2,9 @@
 namespace ConnectFour\Strategy;
 
 if (!defined('ROOT')) define('ROOT', dirname(__DIR__) . '/');
-require_once(ROOT.'lib.php');
-require_once(ROOT.'model/game.php');
-require_once(ROOT.'strategy/strategy.php');
+require_once ROOT.'lib.php';
+require_once ROOT.'model/game.php';
+require_once ROOT.'strategy/strategy.php';
 
 class Smart extends Strategy
 {
@@ -12,11 +12,12 @@ class Smart extends Strategy
     {
         assert(!$game->isGameOver(), 'No next move for finished game');
 
-        $bestScore = -1;
+        $bestScore = -PHP_INT_MAX;
         $bestMoves = [];
 
         $strategyMoves = $game->availableMoves();
-        assert(!empty($strategyMoves), 'Game is not over, but there are no available moves');
+        assert(!empty($strategyMoves),
+            'Game is not over, but there are no available moves');
         foreach ($strategyMoves as $strategyMove) {
             $subgame = clone $game;
             $subgame->doMove($strategyMove, 1);
@@ -27,7 +28,8 @@ class Smart extends Strategy
                 $score = 0;
 
                 $playerMoves = $subgame->availableMoves();
-                assert(!empty($playerMoves), 'Game is not over, but there are no available moves');
+                assert(!empty($playerMoves),
+                    'Game is not over, but there are no available moves');
                 foreach ($playerMoves as $playerMove) {
                     $subsubgame = clone $subgame;
                     $subsubgame->doMove($playerMove, 0);

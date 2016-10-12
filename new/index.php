@@ -2,8 +2,8 @@
 namespace ConnectFour;
 
 if (!defined('ROOT')) define('ROOT', dirname(__DIR__).'/');
-require_once(ROOT.'lib.php');
-require_once(ROOT.'model/game.php');
+require_once ROOT.'lib.php';
+require_once ROOT.'model/game.php';
 
 $strategy = $_GET['strategy'];
 
@@ -19,6 +19,6 @@ if (!in_array($strategy, STRATEGIES, true)) {
 $pid = Lib\generatePID();
 $game = new Model\Game();
 $contents = json_encode(['strategy' => $strategy, 'game' => $game]);
-
 file_put_contents(DATA_DIR.$pid, $contents);
+
 Lib\responseSuccess(['pid' => $pid]);

@@ -2,8 +2,14 @@
 namespace ConnectFour\Lib;
 
 if (!defined('ROOT')) define('ROOT', __DIR__.'/');
-require_once(ROOT.'config.php');
+require_once ROOT.'config.php';
 
+/**
+  * Echoes a response as JSON.
+  *
+  *
+  * @param $array
+  */
 function response($array, $status = null)
 {
     if (is_null($status)) {

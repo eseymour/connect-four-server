@@ -1,11 +1,18 @@
 # Connect Four Server
 
 ## Unreleased
+### Added
+- Created `Strategy\Strategy`, which is the base class for strategies. Exposes a
+single method `nextMove`, which can be overridden to define different
+strategies.
+- Added smart opponent as defined by `Strategy\Smart`.
+- Random opponent is now defined by `Strategy\Random`
 ### Changed
+- Conforms to PSR-1 and PSR-2
 - Refactored redundant code from `Model\Board`.
 - Memoized check for winning row, so that it doesn't generate rows multiple
 times during testing.
-- Slight changes to the `Model\Game` ABI. Function ames should be more in line
+- Slight changes to the `Model\Game` ABI. Function names should be more in line
 with what they do.
 
 ## [0.3.0] - 2016-01-04

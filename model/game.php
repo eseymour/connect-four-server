@@ -2,8 +2,8 @@
 namespace ConnectFour\Model;
 
 if (!defined('ROOT')) define('ROOT', dirname(__DIR__) . '/');
-require_once(ROOT.'lib.php');
-require_once(ROOT.'model/board.php');
+require_once ROOT.'lib.php';
+require_once ROOT.'model/board.php';
 
 class Game implements \JsonSerializable
 {
@@ -30,21 +30,6 @@ class Game implements \JsonSerializable
         $this->moves = [];
     }
 
-    public function __clone()
-    {
-        $this->board = clone $this->board;
-    }
-
-    public function getBoard()
-    {
-        return $this->board;
-    }
-
-    public function getTurn()
-    {
-        return $this->turn;
-    }
-
     public function availableMoves()
     {
         return $this->board->availableMoves();
@@ -61,15 +46,6 @@ class Game implements \JsonSerializable
         $this->moves[] = $move;
     }
 
-    public function undoLastMove()
-    {
-        assert(!empty($this->moves), 'There is no last move.');
-
-        $this->turn--;
-        $player = $this->board->undoMove(array_pop($this->moves));
-        assert($this->turn % 2 == $player, 'Movelist and board desynchronized.');
-    }
-
     public function isGameOver()
     {
         return $this->turn >= 42 || $this->isWin();
@@ -78,6 +54,11 @@ class Game implements \JsonSerializable
     public function isWin()
     {
         return !empty($this->getRow());
+    }
+
+    public function isDraw()
+    {
+        return $this->turn >= 42 && !$this->isWin();
     }
 
     public function getRow()
@@ -93,13 +74,17 @@ class Game implements \JsonSerializable
         return $this->winningRow;
     }
 
-    public function isDraw()
-    {
-        return $this->turn >= 42 && !$this->isWin();
-    }
-
     public function jsonSerialize()
     {
-        return ['board'=>$this->board, 'turn'=>$this->turn, 'winningRow'=>$this->winningRow];
+        return [
+            'board'=>$this->board,
+            'turn'=>$this->turn,
+            'winningRow'=>$this->winningRow,
+        ];
+    }
+
+    public function __clone()
+    {
+        $this->board = clone $this->board;
     }
 }

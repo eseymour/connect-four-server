@@ -11,6 +11,7 @@ ini_set('display_errors', false);
 ini_set('error_reporting', E_ALL);
 ini_set('error_log', DATA_DIR.'log.txt');
 
+// Change ASSERT_ACTIVE to false on production
 assert_options(ASSERT_ACTIVE, true);
 assert_options(ASSERT_BAIL, true);
 assert_options(ASSERT_CALLBACK, 'ConnectFour\Lib\assertResponse');
