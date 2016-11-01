@@ -1,12 +1,13 @@
 # Connect Four Server
 
-## Unreleased
+## [1.0.0] - 2016-10-31
 ### Added
 - Created `Strategy\Strategy`, which is the base class for strategies. Exposes a
 single method `nextMove`, which can be overridden to define different
 strategies.
 - Added smart opponent as defined by `Strategy\Smart`.
-- Random opponent is now defined by `Strategy\Random`
+- Random opponent is now defined by `Strategy\Random`.
+
 ### Changed
 - Conforms to PSR-1 and PSR-2
 - Refactored redundant code from `Model\Board`.
@@ -47,5 +48,6 @@ on the code structure.
 - `CHANGELOG` as an exercise in change logs
 - `.gitignore` file
 
+[1.0.0]: https://github.com/eseymour/connect-four-server/tree/v1.0.0
 [0.2.0]: https://github.com/eseymour/connect-four-server/tree/v0.2.0
 [0.1.0]: https://github.com/eseymour/connect-four-server/tree/v0.1.0

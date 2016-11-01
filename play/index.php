@@ -48,6 +48,7 @@ $game = new Model\Game($data['game']);
 $availableMoves = $game->availableMoves();
 if (!in_array($move, $availableMoves)) {
     Lib\responseError("Invalid move, $move");
+    exit;
 }
 
 $playerMove = (int) $move;
